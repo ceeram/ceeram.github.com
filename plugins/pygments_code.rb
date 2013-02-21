@@ -11,21 +11,26 @@ module HighlightCode
     lang = 'objc' if lang == 'm'
     lang = 'perl' if lang == 'pl'
     lang = 'yaml' if lang == 'yml'
-    str = pygments(str, lang).match(/<pre>(.+)<\/pre>/m)[1].to_s.gsub(/ *$/, '') #strip out divs <div class="highlight">
+    opts = {}
+    if lang == 'phpinline'
+      lang = 'php'
+      opts = {:startinline => true}
+    end
+    str = pygments(str, lang, opts).match(/<pre>(.+)<\/pre>/m)[1].to_s.gsub(/ *$/, '') #strip out divs <div class="highlight">
     tableize_code(str, lang)
   end
 
-  def pygments(code, lang)
+  def pygments(code, lang, opts)
     if defined?(PYGMENTS_CACHE_DIR)
       path = File.join(PYGMENTS_CACHE_DIR, "#{lang}-#{Digest::MD5.hexdigest(code)}.html")
       if File.exist?(path)
         highlighted_code = File.read(path)
       else
-        highlighted_code = Pygments.highlight(code, :lexer => lang, :formatter => 'html', :options => {:encoding => 'utf-8'})
+        highlighted_code = Pygments.highlight(code, :lexer => lang, :formatter => 'html', :options => opts.merge({:encoding => 'utf-8'}))
         File.open(path, 'w') {|f| f.print(highlighted_code) }
       end
     else
-      highlighted_code = Pygments.highlight(code, :lexer => lang, :formatter => 'html', :options => {:encoding => 'utf-8'})
+      highlighted_code = Pygments.highlight(code, :lexer => lang, :formatter => 'html', :options => opts.merge({:encoding => 'utf-8'}))
     end
     highlighted_code
   end
