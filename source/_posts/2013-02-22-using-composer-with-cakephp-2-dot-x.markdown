@@ -4,7 +4,7 @@ title: "Using composer with CakePHP 2.x"
 date: 2013-02-22 00:21
 comments: true
 categories:
-published: false
+published: true
 ---
 
 Lately i have been hacking on [Opauth](http://opauth.org) and finally was
