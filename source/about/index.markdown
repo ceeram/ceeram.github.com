@@ -35,6 +35,7 @@ CakeFest 2012 and in general context on the AmsterdamPHP usergroup
 ###Contact & Online presence
 
 - Email: c33ram AT gmail.com
+- Github: [https://github.com/ceeram](https://github.com/ceeram)
 - Ohloh: [http://ohloh.net/accounts/ceeram](http://ohloh.net/accounts/ceeram)
 - SlideShare: [http://slideshare.net/ceeram](http://slideshare.net/ceeram)
 - StackOverflow: [http://stackoverflow.com/users/1556968/ceeram](http://stackoverflow.com/users/1556968/ceeram)
