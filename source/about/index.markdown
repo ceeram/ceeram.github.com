@@ -6,7 +6,7 @@ sharing: false
 footer: false
 ---
 
-Hi there, i'm Marc, known as Ceeram on the internet. I love working on open
+Hi there, I'm Marc, known as Ceeram on the internet. I love working on open
 source PHP projects in my spare time. Undercover as programmer, as i own a
 wholesale company that sells carparts and only code in my free time.
 
@@ -23,7 +23,7 @@ Projects I contribute to
 
 ###Presentations
 
-Here are some talks that I’ve given on conferences.
+Here are some talks that I've given on conferences.
 
 - Extending AuthComponent, talk on CakePHP AuthComponent adapters for
 authentication and authorization. Presented at CakeFest 2012
