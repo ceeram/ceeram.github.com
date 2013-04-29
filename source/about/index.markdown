@@ -27,7 +27,6 @@ Here are some talks that I've given on conferences.
 
 - Extending AuthComponent, talk on CakePHP AuthComponent adapters for
 authentication and authorization. Presented at CakeFest 2012
-
 - Create a RESTful API, talk on building a REST api, which focusses on the
 theory of REST. I have given this presentation in the CakePHP context at
 CakeFest 2012 and in general context on the AmsterdamPHP usergroup
