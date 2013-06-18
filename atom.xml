@@ -4,7 +4,7 @@
   <title><![CDATA[Ceeram]]></title>
   <link href="http://ceeram.github.com/atom.xml" rel="self"/>
   <link href="http://ceeram.github.com/"/>
-  <updated>2013-04-29T16:37:39+02:00</updated>
+  <updated>2013-06-18T12:49:27+02:00</updated>
   <id>http://ceeram.github.com/</id>
   <author>
     <name><![CDATA[Ceeram]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Adding CakePHP as composer package]]></title>
+    <link href="http://ceeram.github.com/blog/2013/06/18/adding-cakephp-as-composer-package/"/>
+    <updated>2013-06-18T12:20:00+02:00</updated>
+    <id>http://ceeram.github.com/blog/2013/06/18/adding-cakephp-as-composer-package</id>
+    <content type="html"><![CDATA[<p>Here is a quick note on how to add CakePHP 2.x as a dependency for your cake project
+using composer.
+The root <code>composer.json</code> file would look something like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>    "name": "vendorname/appname",
+</span><span class='line'>    "description": "Addding cake as composer package",
+</span><span class='line'>    "repositories": [
+</span><span class='line'>        {
+</span><span class='line'>            "type": "package",
+</span><span class='line'>            "package": {
+</span><span class='line'>                "name": "cakephp/cakephp",
+</span><span class='line'>                "version": "2.3.6",
+</span><span class='line'>                "dist": {
+</span><span class='line'>                    "url": "https://github.com/cakephp/cakephp/archive/2.3.6.zip",
+</span><span class='line'>                    "type": "zip"
+</span><span class='line'>                },
+</span><span class='line'>                "source": {
+</span><span class='line'>                    "url": "https://github.com/cakephp/cakephp/",
+</span><span class='line'>                    "type": "git",
+</span><span class='line'>                    "reference": "tree/2.3.6/"
+</span><span class='line'>                }
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    ],
+</span><span class='line'>    "require":{
+</span><span class='line'>        "cakephp/cakephp": "~2.3"
+</span><span class='line'>    }
+</span><span class='line'>    "config":{
+</span><span class='line'>        "vendor-dir":"Vendor"
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, we don&#8217;t specify autoload or include-dirs, we let CakePHP&#8217;s own
+autoloader still handle that part.</p>
+
+<p>Next you need to update your <code>app/webroot/index.php</code> (and <code>test.php</code>)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib');</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And also update your <code>app/Console/cake.php</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$root = dirname(dirname(__FILE__)) . $ds . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp';
+</span><span class='line'>ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using composer with CakePHP 2.x]]></title>
