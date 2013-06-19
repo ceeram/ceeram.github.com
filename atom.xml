@@ -4,7 +4,7 @@
   <title><![CDATA[Ceeram]]></title>
   <link href="http://ceeram.github.com/atom.xml" rel="self"/>
   <link href="http://ceeram.github.com/"/>
-  <updated>2013-06-19T14:12:37+02:00</updated>
+  <updated>2013-06-19T14:25:35+02:00</updated>
   <id>http://ceeram.github.com/</id>
   <author>
     <name><![CDATA[Ceeram]]></name>
@@ -80,7 +80,7 @@ The root <code>composer.json</code> file would look something like this:</p>
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>As you can see, we don&#8217;t specify autoload or include-dirs, we let CakePHP&#8217;s own
+<p>As you can see, we don&rsquo;t specify autoload or include-dirs, we let CakePHP&rsquo;s own
 autoloader still handle that part.</p>
 
 <p>Next you need to update your <code>app/webroot/index.php</code> (and <code>test.php</code>)</p>
@@ -259,8 +259,8 @@ Besides installing the libraries to the <code>app/Vendor/</code> directory it al
 
 <p>Check <a href="http://packagist.org">Packagist</a> for more composer packages</p>
 
-<p>One day you can&#8217;t imagine how you ever could live without a decent dependency manager for your PHP projects.
-I&#8217;m totally hooked on <a href="https://getcomposer.org">composer</a></p>
+<p>One day you can&rsquo;t imagine how you ever could live without a decent dependency manager for your PHP projects.
+I&rsquo;m totally hooked on <a href="https://getcomposer.org">composer</a></p>
 ]]></content>
   </entry>
   
@@ -280,7 +280,7 @@ After applying this commit on my octopress install new posts will now be created
     <link href="http://ceeram.github.com/blog/2013/02/21/ceeram-finally-starts-blogging/"/>
     <updated>2013-02-21T12:21:00+01:00</updated>
     <id>http://ceeram.github.com/blog/2013/02/21/ceeram-finally-starts-blogging</id>
-    <content type="html"><![CDATA[<p>So i finally have set up a blog to publish things that don&#8217;t fit in 140 characters.
+    <content type="html"><![CDATA[<p>So i finally have set up a blog to publish things that don&rsquo;t fit in 140 characters.
 Mostly i will use the blog for personal reference, but you might find things you like.</p>
 
 <!--more-->
