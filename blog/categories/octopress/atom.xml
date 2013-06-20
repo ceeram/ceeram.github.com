@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Ceeram]]></title>
+  <link href="http://ceeram.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://ceeram.github.com/"/>
+  <updated>2013-06-20T10:40:41+02:00</updated>
+  <id>http://ceeram.github.com/</id>
+  <author>
+    <name><![CDATA[Ceeram]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rake new_post as draft]]></title>
+    <link href="http://ceeram.github.com/blog/2013/02/21/rake-new-post-as-draft/"/>
+    <updated>2013-02-21T23:36:00+01:00</updated>
+    <id>http://ceeram.github.com/blog/2013/02/21/rake-new-post-as-draft</id>
+    <content type="html"><![CDATA[<p>The first thing after setting up Octopress was looking for ways to create new posts as draft by default.
+As always Google search was very helpfull and found me this <a href="https://github.com/imathis/octopress/pull/966">pull request</a>
+After applying this commit on my octopress install new posts will now be created with published: false</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: composer | Ceeram]]></title>
+  <link href="http://ceeram.github.com/blog/categories/composer/atom.xml" rel="self"/>
+  <link href="http://ceeram.github.com/"/>
+  <updated>2013-06-20T10:40:41+02:00</updated>
+  <id>http://ceeram.github.com/</id>
+  <author>
+    <name><![CDATA[Ceeram]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Adding CakePHP as composer package]]></title>
+    <link href="http://ceeram.github.com/blog/2013/06/18/adding-cakephp-as-composer-package/"/>
+    <updated>2013-06-18T12:20:00+02:00</updated>
+    <id>http://ceeram.github.com/blog/2013/06/18/adding-cakephp-as-composer-package</id>
+    <content type="html"><![CDATA[<p>Here is a quick note on how to add CakePHP 2.x as a dependency for your cake project
+using composer.
+The root <code>composer.json</code> file would look something like this:</p>
+
+<p>```
+{</p>
+
+<pre><code>"name": "vendorname/appname",
+"description": "Addding cake as composer package",
+"repositories": [
+    {
+        "type": "package",
+        "package": {
+            "name": "cakephp/cakephp",
+            "version": "2.3.6",
+            "dist": {
+                "url": "https://github.com/cakephp/cakephp/archive/2.3.6.zip",
+                "type": "zip"
+            },
+            "source": {
+                "url": "https://github.com/cakephp/cakephp/",
+                "type": "git",
+                "reference": "tree/2.3.6/"
+            }
+        }
+    }
+],
+"require":{
+    "cakephp/cakephp": "~2.3"
+},
+"config":{
+    "vendor-dir":"Vendor"
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you can see, we don&rsquo;t specify autoload or include-dirs, we let CakePHP&rsquo;s own
+autoloader still handle that part.</p>
+
+<p>Next you need to update your <code>app/webroot/index.php</code> (and <code>test.php</code>)</p>
+
+<p><code>
+define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib');
+</code></p>
+
+<p>And also update your <code>app/Console/cake.php</code></p>
+
+<p><code>
+$root = dirname(dirname(__FILE__)) . $ds . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp';
+ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using composer with CakePHP 2.x]]></title>
+    <link href="http://ceeram.github.com/blog/2013/02/22/using-composer-with-cakephp-2-dot-x/"/>
+    <updated>2013-02-22T00:21:00+01:00</updated>
+    <id>http://ceeram.github.com/blog/2013/02/22/using-composer-with-cakephp-2-dot-x</id>
+    <content type="html"><![CDATA[<p>Lately i have been hacking on <a href="http://opauth.org">Opauth</a> and finally was
+forced to learn more about composer.
+Within the CakePHP community composer has not been adopted really,
+altough <code>composer-installer</code> supports an easy way for installing <code>cakephp-plugin</code> already.
+Many plugin maintainers have not added <code>composer.json</code> files to their repositories, as CakePHP itself is not using it as well.
+There is no need to stop you from using composer with your CakePHP application. You can install both plugins and 3rd party libraries easily.
+Currently you would clone/download required libraries to the <code>vendors/</code> or <code>app/Vendor/</code> directory.</p>
+
+<!--more-->
+
+
+<p>For libraries that support composer install, here is the way to go:</p>
+
+<p><code>
+$ cd app/
+$ curl -s https://getcomposer.org/installer | php
+$ php composer.phar require --no-update opauth/opauth:dev-wip/1.0 opauth/twitter:dev-wip/1.0
+$ php composer.phar config vendor-dir Vendor
+$ php composer.phar install
+</code></p>
+
+<p>Note: the following would also work, but would not add the vendor-dir to <code>composer.json</code>
+<code>
+$ COMPOSER_VENDOR_DIR=Vendor php composer.phar install
+</code></p>
+
+<p>This will create a <code>composer.json</code> file with the required dependencies for your application.
+<code>--no-update</code> is needed here to avoid installing directly to the default directory for composer, which is <code>vendor/</code>
+You can also use the init command for creating the composer.json, only make sure you have configured the <code>vendor-dir</code>
+before running <code>install</code> or <code>require</code></p>
+
+<p>When running install it would produce the following output
+```
+Loading composer repositories with package information
+Installing dependencies
+  &ndash; Installing themattharris/tmhoauth (0.7.5)</p>
+
+<pre><code>Cloning 71e2594f5a6b720a309c627bd457926e1287c1c2
+</code></pre>
+
+<ul>
+<li><p>Installing opauth/opauth (dev-wip/1.0 09547ca)
+Cloning 09547ca9620a2f34ea5472fad4c7787d0538981e</p></li>
+<li><p>Installing opauth/twitter (dev-wip/1.0 a849f80)
+Cloning a849f8048042a2b49ed5b0291363fd60d46b5258</p></li>
+</ul>
+
+
+<p>opauth/opauth suggests installing opauth/facebook (Allows Facebook authentication)
+opauth/opauth suggests installing opauth/google (Allows Google authentication)
+Writing lock file
+Generating autoload files
+```</p>
+
+<p>The opauth/twitter package had its own dependency on tmhOAuth, which will automatically get installed as well.
+Besides installing the libraries to the <code>app/Vendor/</code> directory it also has generated <code>app/Vendor/autoload.php</code></p>
+
+<p>In your <code>app/Config/bootstrap.php</code> you will import the autoload file so you can instantiate all vendor classes directly
+<code>phpinline
+App::import('Vendor', array('file' =&gt; 'autoload'));
+</code></p>
+
+<p>Opauth would be instantiated in your UsersController.php
+<code>phpinline
+$Opauth = new Opauth\Opauth($config);
+$data = $Opauth-&gt;run();
+</code></p>
+
+<p>Install cakephp-plugin with composer
+```
+$ php composer.phar require ceeram/cakepdf:dev-master
+composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies
+  &ndash; Installing ceeram/cakepdf (dev-master 1.0)</p>
+
+<pre><code>Cloning 1.0
+</code></pre>
+
+<p>Writing lock file
+Generating autoload files
+```
+Now the CakePdf plugin has been installed in app/Plugin/CakePdf</p>
+
+<p>You can also run an interactive composer console
+```
+$ php composer.phar require
+Search for a package []: shama/ftp</p>
+
+<p>Found 1 packages matching shama/ftp</p>
+
+<p>   [0] shama/ftp dev-master</p>
+
+<p>Enter package # to add, or a &ldquo;[package] [version]&rdquo; couple if it is not listed []: 0
+Search for a package []:
+composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies
+  &ndash; Installing shama/ftp (dev-master a84483c)</p>
+
+<pre><code>Cloning a84483ccff167c63c0b69fcf55b365b87972d951
+</code></pre>
+
+<p>Writing lock file
+Generating autoload files
+```</p>
+
+<p>Check <a href="http://packagist.org">Packagist</a> for more composer packages</p>
+
+<p>One day you can&rsquo;t imagine how you ever could live without a decent dependency manager for your PHP projects.
+I&rsquo;m totally hooked on <a href="https://getcomposer.org">composer</a></p>
+]]></content>
+  </entry>
+  
+</feed>
