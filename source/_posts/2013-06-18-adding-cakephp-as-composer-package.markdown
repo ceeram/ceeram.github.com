@@ -3,7 +3,7 @@ layout: post
 title: "Adding CakePHP as composer package"
 date: 2013-06-18 12:20
 comments: true
-categories:
+categories: [CakePHP, composer]
 published: true
 ---
 
