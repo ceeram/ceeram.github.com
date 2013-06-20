@@ -35,7 +35,7 @@ The root `composer.json` file would look something like this:
     ],
     "require":{
         "cakephp/cakephp": "~2.3"
-    }
+    },
     "config":{
         "vendor-dir":"Vendor"
     }
