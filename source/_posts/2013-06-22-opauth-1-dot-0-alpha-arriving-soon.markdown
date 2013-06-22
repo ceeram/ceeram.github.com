@@ -95,4 +95,78 @@ example does not work when opauth is in a subdirectory
 
 Now point the browser to http://localhost/opauth/twitter to see it in action.
 
+### Example in CakePHP application###
 
+Here is an example on using Opauth 1.0 in a CakePHP application. Create a fresh
+application (or use an existing application), add the following composer.json
+file and then run `composer install`
+
+    {
+        "require": {
+            "opauth/opauth": "dev-wip/1.0",
+            "opauth/twitter": "dev-wip/1.0"
+        },
+		"config":{
+			"vendor-dir":"Vendor"
+		}
+    }
+
+In your `app/Config/bootstrap.php` add the following lines
+
+ 	App::import('Vendor', array('file' => 'autoload'));
+    Configure::write('Opauth', array(
+		'Strategy' => array(
+			'Twitter' => array(
+				'key' => 'your_key',
+				'secret' => 'your_secret'
+				),
+			),
+		'path' => '/opauth/'
+    );
+
+In your `app/Config/routes.php` add the following line
+
+	Router::connect('/opauth/*', array('controller' => 'users', 'action' => 'opauth'));
+
+In your `UsersController.php` add the following action
+
+	public function opauth() {
+		$Opauth = new Opauth\Opauth($config);
+		$response = $Opauth->run();
+		//use the Response object as you like
+		//debug($response); to see what it looks like
+	}
+
+Now point the browser to http://pathtoyour/application/opauth/twitter to see it in action.
+
+Alternatively you could use an Authenticate adapter
+
+create `app/Controller/Component/Auth/OpauthAuthenticate.php`
+
+	<?php
+
+	class OpauthAuthenticate extends BaseAuthenticate {
+
+		public function authenticate(CakeRequest $request, CakeResponse $response) {
+			$config = Configure::read('Opauth');
+			try {
+				$Opauth = new Opauth\Opauth($config);
+				$result = $Opauth->run();
+				return $result->info;
+			} catch (Exception $e) {}
+			return false;
+		}
+
+	}
+
+
+and your UsersController opauth action would then look like:
+
+	public function opauth() {
+		$this->Auth->authenticate = 'Opauth';
+		if ($this->Auth->login()) {
+			return $this->redirect($this->Auth->loginRedirect);
+		}
+		$this->Session->setFlash('Social login failed');
+		$this->redirect('/');
+	}
