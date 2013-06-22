@@ -3,7 +3,7 @@ layout: post
 title: "Using composer with CakePHP 2.x"
 date: 2013-02-22 00:21
 comments: true
-categories:
+categories: [CakePHP, composer]
 published: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Rake new_post as draft"
 date: 2013-02-21 23:36
 comments: true
-categories:
+categories: octopress
 published: true
 ---
 
