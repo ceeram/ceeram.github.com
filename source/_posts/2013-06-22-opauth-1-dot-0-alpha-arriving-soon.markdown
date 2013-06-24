@@ -4,7 +4,7 @@ title: "Opauth 1.0-alpha arriving soon"
 date: 2013-06-22 12:59
 comments: true
 categories: [opauth, oauth]
-published: false
+published: true
 ---
 
 Lately i have been hacking on [Opauth](http://opauth.org) as i blogged about
