@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ceeram</title>
+  <title>Opauth 1.0-alpha arriving soon - Ceeram</title>
   <meta name="author" content="Ceeram">
 
   
@@ -20,7 +20,7 @@ Opauth version 1.0 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ceeram.github.com">
+  <link rel="canonical" href="http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Ceeram" type="application/atom+xml">
@@ -78,15 +78,12 @@ Opauth version 1.0 &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/">Opauth 1.0-alpha arriving soon</a></h1>
+      <h1 class="entry-title">Opauth 1.0-alpha arriving soon</h1>
     
     
       <p class="meta">
@@ -109,7 +106,7 @@ Opauth version 1.0 &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Lately i have been hacking on <a href="http://opauth.org">Opauth</a> as i blogged about
+<div class="entry-content"><p>Lately i have been hacking on <a href="http://opauth.org">Opauth</a> as i blogged about
 earlier already. Most things are now in place for what will be released as
 Opauth version 1.0. Currently its still a work in progress, but if you like, you
 can already play with it and provide some feedback before we freeze the api.</p>
@@ -280,135 +277,16 @@ class OpauthAuthenticate extends BaseAuthenticate {
 }
 </code></pre>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/18/adding-cakephp-as-composer-package/">Adding CakePHP as composer package</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Ceeram</span></span>
 
-<time datetime="2013-06-18T12:20:00+02:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Here is a quick note on how to add CakePHP 2.x as a dependency for your cake project
-using composer.
-The root <code>composer.json</code> file would look something like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{
-</span><span class='line'>    "name": "vendorname/appname",
-</span><span class='line'>    "description": "Addding cake as composer package",
-</span><span class='line'>    "repositories": [
-</span><span class='line'>        {
-</span><span class='line'>            "type": "package",
-</span><span class='line'>            "package": {
-</span><span class='line'>                "name": "cakephp/cakephp",
-</span><span class='line'>                "version": "2.3.6",
-</span><span class='line'>                "dist": {
-</span><span class='line'>                    "url": "https://github.com/cakephp/cakephp/archive/2.3.6.zip",
-</span><span class='line'>                    "type": "zip"
-</span><span class='line'>                },
-</span><span class='line'>                "source": {
-</span><span class='line'>                    "url": "https://github.com/cakephp/cakephp/",
-</span><span class='line'>                    "type": "git",
-</span><span class='line'>                    "reference": "tree/2.3.6/"
-</span><span class='line'>                }
-</span><span class='line'>            }
-</span><span class='line'>        }
-</span><span class='line'>    ],
-</span><span class='line'>    "require":{
-</span><span class='line'>        "cakephp/cakephp": "~2.3"
-</span><span class='line'>    },
-</span><span class='line'>    "config":{
-</span><span class='line'>        "vendor-dir":"Vendor"
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see, we don&rsquo;t specify autoload or include-dirs, we let CakePHP&rsquo;s own
-autoloader still handle that part.</p>
-
-<p>Next you need to update your <code>app/webroot/index.php</code> (and <code>test.php</code>)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib');</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And also update your <code>app/Console/cake.php</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$root = dirname(dirname(__FILE__)) . $ds . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp';
-</span><span class='line'>ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/22/using-composer-with-cakephp-2-dot-x/">Using composer with CakePHP 2.x</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -420,118 +298,44 @@ autoloader still handle that part.</p>
   
 
 
-<time datetime="2013-02-22T00:21:00+01:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Lately i have been hacking on <a href="http://opauth.org">Opauth</a> and finally was
-forced to learn more about composer.
-Within the CakePHP community composer has not been adopted really,
-altough <code>composer-installer</code> supports an easy way for installing <code>cakephp-plugin</code> already.
-Many plugin maintainers have not added <code>composer.json</code> files to their repositories, as CakePHP itself is not using it as well.
-There is no need to stop you from using composer with your CakePHP application. You can install both plugins and 3rd party libraries easily.
-Currently you would clone/download required libraries to the <code>vendors/</code> or <code>app/Vendor/</code> directory.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/02/22/using-composer-with-cakephp-2-dot-x/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2013-06-22T12:59:00+02:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2013</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/21/rake-new-post-as-draft/">Rake new_post as draft</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/oauth/'>oauth</a>, <a class='category' href='/blog/categories/opauth/'>opauth</a>
+  
+</span>
 
 
-<time datetime="2013-02-21T23:36:00+01:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>The first thing after setting up Octopress was looking for ways to create new posts as draft by default.
-As always Google search was very helpfull and found me this <a href="https://github.com/imathis/octopress/pull/966">pull request</a>
-After applying this commit on my octopress install new posts will now be created with published: false</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/" data-via="ceeram" data-counturl="http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/21/ceeram-finally-starts-blogging/">Ceeram finally starts blogging</a></h1>
-    
-    
-      <p class="meta">
-        
+        <a class="basic-alignment left" href="/blog/2013/06/18/adding-cakephp-as-composer-package/" title="Previous Post: Adding CakePHP as composer package">&laquo; Adding CakePHP as composer package</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-21T12:21:00+01:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So i finally have set up a blog to publish things that don&rsquo;t fit in 140 characters.
-Mostly i will use the blog for personal reference, but you might find things you like.</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/02/21/ceeram-finally-starts-blogging/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -564,7 +368,7 @@ Mostly i will use the blog for personal reference, but you might find things you
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/ceeram">@ceeram</a> on GitHub
@@ -604,6 +408,7 @@ Mostly i will use the blog for personal reference, but you might find things you
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -618,7 +423,10 @@ Mostly i will use the blog for personal reference, but you might find things you
       var disqus_shortname = 'ceeramgithubcom';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/';
+        var disqus_url = 'http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

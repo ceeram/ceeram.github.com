@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oauth | Ceeram]]></title>
+  <link href="http://ceeram.github.com/blog/categories/oauth/atom.xml" rel="self"/>
+  <link href="http://ceeram.github.com/"/>
+  <updated>2013-06-24T11:13:53+02:00</updated>
+  <id>http://ceeram.github.com/</id>
+  <author>
+    <name><![CDATA[Ceeram]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Opauth 1.0-alpha arriving soon]]></title>
+    <link href="http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon/"/>
+    <updated>2013-06-22T12:59:00+02:00</updated>
+    <id>http://ceeram.github.com/blog/2013/06/22/opauth-1-dot-0-alpha-arriving-soon</id>
+    <content type="html"><![CDATA[<p>Lately i have been hacking on <a href="http://opauth.org">Opauth</a> as i blogged about
+earlier already. Most things are now in place for what will be released as
+Opauth version 1.0. Currently its still a work in progress, but if you like, you
+can already play with it and provide some feedback before we freeze the api.</p>
+
+<h3>Changes</h3>
+
+<p>Here a quick overview of things that have changed since 0.x versions:</p>
+
+<h4>Opauth no longer makes an additional request to your application</h4>
+
+<p>In the past, Opauth used <code>callback_transport</code> config and <code>shipToCallback()</code>
+method to pass the authentication data to your application. This has all been
+removed as you will now receive a <code>Response</code> object directly from <code>Opauth-&gt;run()</code>
+This also requires less to none framework specific code around Opauth.</p>
+
+<h4>Http requests are now handled by individual transport classes</h4>
+
+<p>We still support non-curl users with the included File transport class, which
+uses the <code>file_get_contents()</code> method. Also there is a built in Curl transport
+class which is the default transport. Additionally you can add your own
+transport classes to make the requests with tools like Guzzle.</p>
+
+<h4>No more PHP 5.2 support</h4>
+
+<p>We have dropped support for this very outdated PHP version. The minimum required
+version is now PHP 5.3. The code has been refactored into several classes and
+namespaces have been added.</p>
+
+<h4>Map response data</h4>
+
+<p>Response mapping was add, so you can add your own mapping in each strategy
+config array to map raw data to the response object in your preferred structure</p>
+
+<h4>What&rsquo;s left?</h4>
+
+<p>In order to push to alpha state, we need to update all documentation and help
+3rd party strategy maintainers to upgrade to 1.0 version.</p>
+
+<p>We have moved the github repo away from uzyn&rsquo;s github account into the <a href="https://github.com/opauth">opauth</a>
+organisation. Feel free to checkout the <code>wip/1.0</code> branch of Opauth and the
+strategies. Feedback or help out updating the docs for Opauth and all the
+strategies will be highly appreciated.</p>
+
+<h3>Example</h3>
+
+<p>Here is a simple example on how to use Opauth 1.0. Create a directory with the
+following composer.json file and then run <code>composer install</code></p>
+
+<pre><code>{
+    "require": {
+        "opauth/opauth": "dev-wip/1.0",
+        "opauth/twitter": "dev-wip/1.0"
+    }
+}
+</code></pre>
+
+<p>Next create <code>index.php</code></p>
+
+<pre><code>&lt;?php
+require 'vendor/autoload.php';
+$config = array(
+        'Strategy' =&gt; array(
+                'Twitter' =&gt; array(
+                        'key' =&gt; 'your_key',
+                        'secret' =&gt; 'your_secret'
+                ),
+        ),
+        'path' =&gt; '/opauth/'
+);
+$Opauth = new Opauth\Opauth($config);
+$response = $Opauth-&gt;run();
+echo "Authed as " . $response-&gt;name . " with uid" . $response-&gt;uid;
+</code></pre>
+
+<p>Fill in the key and secret in <code>index.php</code> then add this <code>.htaccess</code></p>
+
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ index.php [QSA,L]
+&lt;/IfModule&gt;
+</code></pre>
+
+<p>Set <code>DocumentRoot</code> of your web server to this directory, or create a vhost as this
+example does not work when opauth is in a subdirectory</p>
+
+<p>Now point the browser to <a href="http://localhost/opauth/twitter">http://localhost/opauth/twitter</a> to see it in action.</p>
+
+<h3>Example in CakePHP application</h3>
+
+<p>Here is an example on using Opauth 1.0 in a CakePHP application. Create a fresh
+application (or use an existing application), add the following composer.json
+file and then run <code>composer install</code></p>
+
+<pre><code>{
+    "require": {
+        "opauth/opauth": "dev-wip/1.0",
+        "opauth/twitter": "dev-wip/1.0"
+    },
+    "config":{
+        "vendor-dir":"Vendor"
+    }
+}
+</code></pre>
+
+<p>In your <code>app/Config/bootstrap.php</code> add the following lines</p>
+
+<pre><code>App::import('Vendor', array('file' =&gt; 'autoload'));
+Configure::write('Opauth', array(
+    'Strategy' =&gt; array(
+        'Twitter' =&gt; array(
+            'key' =&gt; 'your_key',
+            'secret' =&gt; 'your_secret'
+            ),
+        ),
+    'path' =&gt; '/opauth/'
+);
+</code></pre>
+
+<p>In your <code>app/Config/routes.php</code> add the following line</p>
+
+<pre><code>Router::connect('/opauth/*', array('controller' =&gt; 'users', 'action' =&gt; 'opauth'));
+</code></pre>
+
+<p>In your <code>UsersController.php</code> add the following action</p>
+
+<pre><code>public function opauth() {
+    $Opauth = new Opauth\Opauth($config);
+    $response = $Opauth-&gt;run();
+    //use the Response object as you like
+    //debug($response); to see what it looks like
+}
+</code></pre>
+
+<p>Now point the browser to <a href="http://pathtoyour/application/opauth/twitter">http://pathtoyour/application/opauth/twitter</a> to see it in action.</p>
+
+<p>Alternatively you could use an Authenticate adapter</p>
+
+<p>create <code>app/Controller/Component/Auth/OpauthAuthenticate.php</code></p>
+
+<pre><code>&lt;?php
+
+class OpauthAuthenticate extends BaseAuthenticate {
+
+    public function authenticate(CakeRequest $request, CakeResponse $response) {
+        $config = Configure::read('Opauth');
+        try {
+            $Opauth = new Opauth\Opauth($config);
+            $result = $Opauth-&gt;run();
+            return $result-&gt;info;
+        } catch (Exception $e) {}
+        return false;
+    }
+
+}
+</code></pre>
+
+<p>and your UsersController opauth action would then look like:</p>
+
+<pre><code>public function opauth() {
+    $this-&gt;Auth-&gt;authenticate = 'Opauth';
+    if ($this-&gt;Auth-&gt;login()) {
+        return $this-&gt;redirect($this-&gt;Auth-&gt;loginRedirect);
+    }
+    $this-&gt;Session-&gt;setFlash('Social login failed');
+    $this-&gt;redirect('/');
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
