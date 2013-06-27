@@ -122,7 +122,7 @@ In your `app/Config/bootstrap.php` add the following lines
 				),
 			),
 		'path' => '/opauth/'
-    );
+    ));
 
 In your `app/Config/routes.php` add the following line
 
