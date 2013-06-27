@@ -4,7 +4,7 @@
   <title><![CDATA[Ceeram]]></title>
   <link href="http://ceeram.github.com/atom.xml" rel="self"/>
   <link href="http://ceeram.github.com/"/>
-  <updated>2013-06-24T11:13:53+02:00</updated>
+  <updated>2013-06-27T12:46:04+02:00</updated>
   <id>http://ceeram.github.com/</id>
   <author>
     <name><![CDATA[Ceeram]]></name>
@@ -136,7 +136,7 @@ Configure::write('Opauth', array(
             ),
         ),
     'path' =&gt; '/opauth/'
-);
+));
 </code></pre>
 
 <p>In your <code>app/Config/routes.php</code> add the following line</p>
