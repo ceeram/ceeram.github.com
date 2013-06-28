@@ -131,6 +131,7 @@ In your `app/Config/routes.php` add the following line
 In your `UsersController.php` add the following action
 
 	public function opauth() {
+		$config = Configure::read('Opauth');
 		$Opauth = new Opauth\Opauth($config);
 		$response = $Opauth->run();
 		//use the Response object as you like
