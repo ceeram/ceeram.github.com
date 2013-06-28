@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oauth | Ceeram]]></title>
   <link href="http://ceeram.github.com/blog/categories/oauth/atom.xml" rel="self"/>
   <link href="http://ceeram.github.com/"/>
-  <updated>2013-06-27T12:46:04+02:00</updated>
+  <updated>2013-06-28T14:24:41+02:00</updated>
   <id>http://ceeram.github.com/</id>
   <author>
     <name><![CDATA[Ceeram]]></name>
@@ -147,6 +147,7 @@ Configure::write('Opauth', array(
 <p>In your <code>UsersController.php</code> add the following action</p>
 
 <pre><code>public function opauth() {
+    $config = Configure::read('Opauth');
     $Opauth = new Opauth\Opauth($config);
     $response = $Opauth-&gt;run();
     //use the Response object as you like

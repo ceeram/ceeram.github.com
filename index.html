@@ -238,6 +238,7 @@ Configure::write('Opauth', array(
 <p>In your <code>UsersController.php</code> add the following action</p>
 
 <pre><code>public function opauth() {
+    $config = Configure::read('Opauth');
     $Opauth = new Opauth\Opauth($config);
     $response = $Opauth-&gt;run();
     //use the Response object as you like
